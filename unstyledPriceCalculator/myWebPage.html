@@ -25,7 +25,7 @@
   </form>
 </div>
 
-<div class= "container">
+<div class= "container-fluid text-center">
   <img src="dog.jfif" class= "img-rounded" alt="Clinque Terre">
 </div>
 
@@ -39,7 +39,9 @@
     let finalPrice = 0;
     dailyRate = s/365;
     finalPrice = dailyRate * d;
-    document.getElementById("finalPrice").innerHTML = finalPrice;
+    round = 50;
+    price= Math.round(((finalPrice+round)/round)*round)
+    document.getElementById("finalPrice").innerHTML = price;
   }
   </script>
 

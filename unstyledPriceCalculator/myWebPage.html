@@ -22,6 +22,8 @@
     <input type="text" id="days" name="days"/><br><br>
     <input type="submit" value="Calculate your price!"><br><br>
     <label id="finalPrice"> ??? </label>
+    <input type="text" id="quoteName" name="name" class="form-control"/><br><br>
+    <input type="button" id="storeQuote" value="Store Quote" class="btn btn-lg"><br><br>
   </form>
 </div>
 
@@ -43,7 +45,45 @@
     price= Math.round(((finalPrice+round)/round)*round)
     document.getElementById("finalPrice").innerHTML = price;
   }
+
+  $('#submit').click(handleClick);
+  $('#storeQuote').click(storeQuote);
+
+  function handleClick(){
+    var salary = $('#salary').val();
+    var days = $('#days').val();
+
+    var url = 'api/getPrice?'+salary+'&days='+days;
+    console.log(url);
+
+    $.ajax(
+      {url:url,
+      success; function(finalPrice){
+        $('#finalPrice').html(finalPrice);
+      }
+    });
+    return false;
+  }
+
+
+  function storeQuote() {
+    var salary = $('#salary').val();
+    var days = $('#days').val();
+    var quoteName = $('#quoteName').val();
+    var url = "/api/storeQuote?"+"quoteName="+quoteName+"&salary="+salary+"&days="+days;
+    console.log(url)
+
+    $.ajax(
+      {url: url,
+      success: function(finalPrice){
+        $("#finalPrice").html(finalPrice);
+      }
+    });
+  }
+
   </script>
+
+  
 
 </body>
 <footer class= "container-fluid text-center">
